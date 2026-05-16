@@ -1,4 +1,5 @@
 server.err.log
 server.out.log
 node_modules/
+public/
 .DS_Store
