@@ -1,0 +1,10 @@
+{
+  "name": "bill-day-pocket",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

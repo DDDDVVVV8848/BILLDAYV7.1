@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="账单日" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>账单日口袋账本</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">iPhone 本地账本</p>
+          <h1>账单日口袋账本</h1>
+          <p class="version-tag">版本 v7</p>
+        </div>
+        <div class="status-pill"><span>账单日</span><b id="billCountdown">未设置</b></div>
+      </header>
+
+      <section class="summary-grid">
+        <article class="metric primary"><span>本月结余</span><strong id="balance">¥0.00</strong></article>
+        <article class="metric"><span>收入</span><strong id="income">¥0.00</strong></article>
+        <article class="metric"><span>支出</span><strong id="expense">¥0.00</strong></article>
+        <article class="metric"><span>每日可花</span><strong id="dailySafeSpend">¥0.00</strong></article>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="panel-heading"><span class="icon">图</span><h2>收支柱状图</h2></div>
+        <div class="bar-chart" id="barChart"></div>
+      </section>
+
+      <section class="panel bill-panel">
+        <div class="panel-heading"><span class="icon">卡</span><h2>账单日准备</h2></div>
+        <div class="reserve-row"><span>需预留账单 + 储蓄</span><strong id="requiredReserve">¥0.00</strong></div>
+        <div class="progress-track"><span id="reserveProgress"></span></div>
+        <p id="reserveStatus" class="good"></p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="icon">+</span><h2>记录一笔</h2></div>
+        <div class="segmented">
+          <button id="expenseMode" class="active" type="button">支出</button>
+          <button id="incomeMode" type="button">收入</button>
+        </div>
+        <div class="form-grid">
+          <label>金额<input id="amount" inputmode="decimal" placeholder="0.00" /></label>
+          <label>日期<input id="date" type="date" /></label>
+          <label id="categoryWrap">类别<select id="category"></select></label>
+          <label>备注<input id="note" placeholder="商家 / 用途" /></label>
+        </div>
+        <button class="primary-button" id="saveEntry" type="button">保存记录</button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="icon">图</span><h2>截图分析</h2></div>
+        <label class="upload-box">
+          <img id="imagePreview" alt="账单截图预览" hidden />
+          <span id="uploadHint">上传支出截图</span>
+          <input id="imageInput" type="file" accept="image/*" />
+        </label>
+        <label>
+          账单文字
+          <textarea id="receiptText" rows="4" placeholder="在 iPhone 照片里长按截图文字，复制后粘贴到这里，例如：美团外卖 支付 ¥36.50"></textarea>
+        </label>
+        <div class="action-row">
+          <button class="secondary-button" id="analyzeReceipt" type="button">分析类别</button>
+          <button class="secondary-button" id="saveReceipt" type="button">记入账本</button>
+        </div>
+        <p class="hint" id="ocrStatus">上传 iPhone 截图后点“分析类别”，会优先识别店铺名称和付款金额区域。</p>
+        <p class="hint">识别结果会自动填到上面的“记录一笔”，你可以改金额或类别后再保存。</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="icon">省</span><h2>省钱建议</h2></div>
+        <p class="advice" id="advice"></p>
+        <div class="category-list" id="categoryList"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><span class="icon">设</span><h2>目标设置</h2></div>
+        <div class="form-grid">
+          <label>账单日<input id="billDay" type="number" min="1" max="28" /></label>
+          <label>预计账单<input id="monthlyBillEstimate" inputmode="decimal" /></label>
+          <label>储蓄目标<input id="savingGoal" inputmode="decimal" /></label>
+        </div>
+      </section>
+
+      <section class="panel entries-panel">
+        <div class="panel-heading"><span class="icon">记</span><h2>最近记录</h2></div>
+        <div class="entry-list" id="entryList"></div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
